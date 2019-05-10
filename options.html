@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 
-<!--This page is the popup when you click on the logo.-->
-
 <html style="height:100%">
 
 <head>
@@ -9,11 +7,88 @@
     <link rel="stylesheet" type="text/css" href="css/skeleton.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <style>
-
+        p {
+            font-size: 1.1em;
+            margin-bottom: 0.75em;
+        }
+        h4 {
+            margin-bottom: 0;
+        }
     </style>
 </head>
 
 <body>
+
+    <div class="container">
+        <h1 style="padding-top:10px">Master Password Preferences</h1>
+        <hr color="white">
+    
+        <div style="width:100%;margin:15px 0;">
+            <h4>Autofill passwords</h4>
+            <p>Automatically calculate and fill all visible password fields on a website</p>
+            <button id="turnOnAutofill">Turn On</button>
+            <button id="turnOffAutofill" style="display:none;">Turn Off</button>
+        </div>
+    
+        <div style="width:100%;margin:15px 0;">
+            <h4>Default Site Type</h4>
+            <p>Site type to use if site type is otherwise unspecified</p>
+            <select id="sitetype">
+                <option value="pin">PIN</option>
+                <option value="short">Short</option>
+                <option value="basic">Basic</option>
+                <option value="medium">Medium</option>
+                <option value="long" selected>Long</option>
+                <option value="maximum">Maximum</option>
+                <option value="name">Name</option>
+                <option value="phrase">Phrase</option>
+            </select>
+        </div>
+    
+        <div style="width:100%;margin:15px 0;">
+            <h4>Default Site Counter</h4>
+            <p>Site counter to use if site counter is otherwise unspecified</p>
+            <input id="sitecounter" type="number" min="1" max="100" value="1">
+        </div>
+    
+        <div style="width:100%;margin:15px 0;">
+            <h4>Default Prefix</h4>
+            <p>Prefix to use if prefix is otherwise unspecified</p>
+            <input id="defaultprefix" type="text" min="1" max="100">
+        </div>
+    
+        <div id="savedsites" style="width:100%;margin:15px 0;">
+            <h4>Saved Sites</h4>
+            <p>When on a website you want to save some details for, click the extension icon, then click the save button.
+            </p>
+            <p><em>
+                    Note: only username, site type, site counter, and prefix are stored locally.
+                    Your passwords are never stored with Master Password
+                </em></p>
+            <div class="row">
+                <div class="two columns">
+                    <h5>Domain</h5>
+                </div>
+                <div class="two columns">
+                    <h5>Username</h5>
+                </div>
+                <div class="two columns">
+                    <h5>Type</h5>
+                </div>
+                <div class="two columns">
+                    <h5>Counter</h5>
+                </div>
+                <div class="two columns">
+                    <h5>Prefix</h5>
+                </div>
+                <div class="two columns">
+                    <h5>Actions</h5>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
 
     <script src="external/browser-polyfill.min.js"></script>
     <script src="scripts/options.js"></script>
