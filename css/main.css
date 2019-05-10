@@ -1,0 +1,75 @@
+html {
+    background:         radial-gradient(black 15%, transparent 16%) 0 0,
+                        radial-gradient(black 15%, transparent 16%) 8px 8px,
+                        radial-gradient(rgba(255,255,255,.05) 15%, transparent 20%) 0 1px,
+                        radial-gradient(rgba(255,255,255,.05) 15%, transparent 20%) 8px 9px;
+    background-color:   #161616;
+    background-size:    16px 16px;
+    padding:            0;
+    margin:             0;
+}
+
+body {
+    background:         radial-gradient(transparent 16%, black);
+
+    width:              100%;
+    min-height:         100%;
+    padding:            0;
+    margin:             0;
+    clear:              both;
+
+    font-family:        'Exo 2',
+                        "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica,
+                        Arial, "Lucida Grande", sans-serif; 
+    font-weight:        300;
+    color:              #DDD;
+}
+
+input, select {
+    background:         rgba(0, 0, 0, .3);
+    border:             1px solid #000;
+    border-radius:      4px;
+
+    width:              100%;
+    /* height:             2em; */
+    margin:             1ex 0;
+
+    font:               inherit;
+    color:              inherit;
+    text-align:         center;
+}
+input:focus, select:focus {
+    outline:            none;
+    box-shadow:         0 0 50px #333;
+}
+input.half, select.half {
+    width:              33%;
+}
+input[type="text"], input[type="password"], input[type="number"] {
+    background-color: rgba(0, 0, 0, .3);
+}
+input.minimal, select.minimal {
+    width:              auto;
+}
+input[type="submit"], input[type="image"] {
+    background:         transparent;
+    border:             none;
+
+    width:              auto;
+    
+    font-size:          2em;
+}
+input[type="submit"] {
+    display:            inline;
+}
+
+button {
+    color: #FFF;
+}
+
+section {
+    width: 360px;
+    text-align: center;
+    padding: 20px;
+    padding-top: 0px;
+}

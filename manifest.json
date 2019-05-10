@@ -1,0 +1,51 @@
+{
+    "manifest_version": 2,
+    "name": "Master Password",
+    "version": "0.0.1",
+    "description": "A cross browser extension based on the Master Password algorithm",
+    "browser_action": {
+        "default_popup": "popup.html",
+        "default_title": "Master Password",
+        "default_icon": {
+            "16": "images/MPWIcon_16.png",
+            "32": "images/MPWIcon_32.png",
+            "48": "images/MPWIcon_48.png",
+            "128": "images/MPWIcon_128.png"
+        }
+    },
+    "content_scripts": [{
+        "matches": ["<all_urls>"],
+        "js": ["scripts/content.js", "external/browser-polyfill.min.js"],
+        "run_at": "document_idle",
+        "all_frames": false
+    }],
+    "background": {
+        "scripts": [
+            "external/typedarray-polyfill.js",
+            "external/encoding-polyfill.js",
+            "external/promise-polyfill.js",
+            "external/setImmediate-polyfill.js",
+            "external/pbkdf2.js",
+            "external/scrypt.js",
+            "external/mpw.js",
+            "external/browser-polyfill.min.js",
+            "scripts/background.js"
+            ],
+        "persistent": true
+    },
+    "options_ui": {
+        "page": "options.html",
+        "open_in_tab": true
+    },
+    "icons": {
+        "16": "images/MPWIcon_16.png",
+        "19": "images/MPWIcon.png",
+        "32": "images/MPWIcon_32.png",
+        "38": "images/MPWIcon.png",
+        "48": "images/MPWIcon_48.png",
+        "128": "images/MPWIcon_128.png"
+    },
+    
+    "permissions": ["tabs", "activeTab", "<all_urls>", "storage"]
+    
+}
