@@ -59,15 +59,14 @@ async function login() {
 }
 
 // get background.js to generate the password
-async function generate() {
+async function generate(sitename, counter, type) {
 
-    // clear any error messages
-    document.getElementById('error').style.display = "none";
-
-    // collect the inputs
-    var sitename = document.getElementById('sitename').value;
-    var counter = document.getElementById('sitecounter').valueAsNumber;
-    var type = document.getElementById('sitetype').value;
+    if(!sitename && !counter && !type) {
+        // collect the inputs
+        sitename = document.getElementById('sitename').value;
+        counter = document.getElementById('sitecounter').valueAsNumber;
+        type = document.getElementById('sitetype').value;
+    }
 
     // input validation
     if (!sitename || !counter || !type || sitename === '' || sitename === ' ') {
