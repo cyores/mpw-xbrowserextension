@@ -1,23 +1,3 @@
-function extractRootDomain(url) {
-    var domain;
-    if (url.indexOf('//') > -1) {
-        domain = url.split('/')[2];
-    }
-    else {
-        domain = url.split('/')[0];
-    }
-    // remove port number if it's there
-    domain = domain.split(':')[0];
-    // remove queries if they're there
-    domain = domain.split('?')[0];
-
-    domainArr = domain.split('.');
-
-    domain = domainArr[(domainArr.length - 1) - 1] + '.' + domainArr[domainArr.length - 1];
-
-    return domain;
-}
-
 // switch UI from login page to site page
 function switchUIToSite(mpwdata) {
     // switch to site screen
