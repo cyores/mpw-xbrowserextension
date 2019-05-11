@@ -5,6 +5,7 @@
 <html>
 
 <head>
+    <meta charset="utf-8" />
     <link rel="stylesheet" type="text/css" href="css/normalize.css">
     <link rel="stylesheet" type="text/css" href="css/skeleton.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
@@ -16,8 +17,93 @@
     </style>
 </head>
 <body>
+
+    <div style="width:100%; margin:0; display:flex;">
+        <div style="width:280px;">
+            <h5 style="padding:10px 0px 0px 10px;">Master Password</h5>
+        </div>
+        <div style="width:70px; text-align:right;">
+            <select id="version" class="minimal">
+                <option value="0">V0</option>
+                <option value="1">V1</option>
+                <option value="2">V2</option>
+                <option value="3" selected>V3</option>
+            </select>
+            <p id="loggedInVersion" style="display:none; margin-top:10px;">Version:</p>
+        </div>
+        <div style="width:20px; text-align:right; padding:12px 0px 0px 20px;">
+            <img id="options" src="images/options.svg" style="cursor:pointer;">
+        </div>
+    </div>
     
+    <section id="identity" style="display: block;">
+        <h4>Identity</h4>
+        <form onsubmit="return false;">
+            <input id="username" type="text" placeholder="Your Full Name" /><br>
+            <input id="masterpass" type="password" placeholder="Your Master Password" /><br>
+            <button id="login" type="submit" style="margin-top:10px">Login</button>
+        </form>
+        <img id="spinner" src="images/spinner.svg" style="display:none;margin:auto;">
+    </section>
+    
+    <section id="site" style="display: none;">
+        <div style="width:100;">
+            <h4 style="margin:0;">Site</h4>
+        </div>
+        <div style="width:100%; display:flex;">
+            <input id="sitename" type="text" placeholder="Site Name (eg. apple.com)" style="margin:8px 0 0 0;" /><br>
+        </div>
+        <div style="width:100%; display:flex">
+            <div style="width:50%;">
+                <input id="sitecounter" type="number" placeholder="Site Counter" style="margin:8px 0 0 0;" min="1" max="100"
+                    value="1">
+            </div>
+            <div style="width:50%">
+                <select id="sitetype" style="margin:8px 0 0 0;">
+                    <option value="pin">PIN</option>
+                    <option value="short">Short</option>
+                    <option value="basic">Basic</option>
+                    <option value="medium">Medium</option>
+                    <option value="long" selected>Long</option>
+                    <option value="maximum">Maximum</option>
+                    <option value="name">Name</option>
+                    <option value="phrase">Phrase</option>
+                </select>
+            </div>
+        </div>
+        <div style="width:100%; display:flex">
+            <button id="savedetails" style="width:100%; margin:8px 0 12px 0;">Save Details</button>
+        </div>
+        <div style="width:100%; margin-top:10px; display:flex; border:1px solid #D1D1D1; border-radius:4px;">
+            <div style="width:72%">
+                <input id="password" style="border:none; font-weight:bold;" type="text" placeholder="Generated password"
+                    disabled>
+            </div>
+            <div id="copy" style="width:14%; cursor:pointer;">
+                <img src="images/copy.svg" alt="copy" width="24" style="padding-top:15px;">
+            </div>
+            <div id="autofill" style="width:14%; cursor:pointer;">
+                <img src="images/autofill.svg" alt="autofill password" width="24" style="padding-top:15px;">
+            </div>
+        </div>
+        <!-- <p id="password" style="margin-top:10px; font-weight:bold;"></p> -->
+    </section>
+    
+    <p style="display:none; text-align:center; color:white" id="copied">Password copied to clipboard!</p>
+    <p style="display:none; text-align:center; color:white" id="saved">Site details saved! See options to edit them.</p>
+    <p style="display:none; text-align:center; color:red" id="error">There was an error.</p>
+    
+    <div id="bottomInfo" style="width:100%; display:none; position:absolute; bottom:-20px; padding:13px 0px 0px 10px;">
+        <div style="width:280px">
+            <p id="loggedInAs">Logged in as:</p>
+        </div>
+        <div style="width:100px; text-align:right; padding-right: 5px;">
+            <p id="logout" style="cursor:pointer">Logout</p>
+        </div>
+    </div>
     <script src="external/browser-polyfill.min.js"></script>
+    <script src="scripts/popup-helpers.js"></script>
+    <script src="scripts/storage.js"></script>
     <script src="scripts/popup.js"></script>
 </body>
 </html>

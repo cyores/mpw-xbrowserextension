@@ -1,4 +1,3 @@
-browser.storage.local.clear();
 var storage = new MPWStorage();
 init();
 

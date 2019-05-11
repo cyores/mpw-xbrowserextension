@@ -25,14 +25,17 @@ function handleMessage(request, sender, sendResponse) {
                 username: rb.username,
                 version: rb.version
             }
+            sendResponse({ success: true, body: 'logged in' });
             mpw.key
-                .then(() => {
-                    sendResponse({ success: true, body: 'logged in' });
-                })
-                .catch((err) => {
-                    mpw = null;
-                    sendResponse({ success: false, body: 'There was an error logging in: ' + err });
-                });
+                // .then(() => {
+                //     console.log('done mpw key');
+                //     sendResponse({ success: true, body: 'logged in' });
+                // })
+                // .catch((err) => {
+                //     mpw = null;
+                //     sendResponse({ success: false, body: 'There was an error logging in: ' + err });
+                // });
+
         }
     }
 
@@ -57,11 +60,11 @@ function handleMessage(request, sender, sendResponse) {
 
     else if(request.action === 'isLoggedIn') {
         let isLoggedIn = mpw ? true : false;
-        sendResponse( { success: true, body: { isLoggedIn: isLoggedIn }});
+        sendResponse({ success: true, body: { isLoggedIn: isLoggedIn, mpwdata: mpwdata }});
     }
 
     else {
-        console.log('Background recieved message it doesnt know what to do with', request);
+        console.log('Background received message it doesnt know what to do with', request);
         sendResponse({ success: false, body: 'I dont know what to do with that request' });
     }
 
