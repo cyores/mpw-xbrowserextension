@@ -93,6 +93,14 @@ async function login() {
 
 }
 
+// ask background.js to logout
+async function logout() {
+    let logoutResponse = await rt.sendMessage({ action: 'logout'});
+    if(logoutResponse.success) {
+        switchUIToLogin();
+    }
+}
+
 // get background.js to generate the password
 async function generate() {
 
@@ -130,8 +138,31 @@ async function generate() {
 
 }
 
+// copy password to clipboard
+function copyToClipboard() {    
+    var ele = document.getElementById('password');
+    ele.toggleAttribute('disabled');
+    ele.select();
+    document.execCommand('copy');
+    ele.toggleAttribute('disabled');
+    document.getElementById('copied').style.display = "block";
+    setTimeout(() => { document.getElementById('copied').style.display = "none"; }, 2000);
+}
+
+function openOptions() {
+    if(rt.openOptionsPage) {
+        rt.openOptionsPage();
+    }
+    else {
+        window.open(rt.getURL('options.html'));
+    }
+}
+
 // register click listeners
 document.getElementById('login').addEventListener('click', login);
+document.getElementById('copy').addEventListener('click', copyToClipboard);
+document.getElementById('logout').addEventListener('click', logout);
+document.getElementById('options').addEventListener('click', openOptions);
 
 // register on change for site inputs
 document.getElementById('sitename').addEventListener('input', generate);
