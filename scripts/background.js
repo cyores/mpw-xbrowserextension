@@ -15,7 +15,7 @@ function handleMessage(request, sender, sendResponse) {
     if(request.action === 'login') {
         if(mpw) {
             console.log('already logged in');
-            sendResponse({ success: true, body: 'logged in' });
+            return Promise.resolve({ success: true, body: 'logged in' });
         }
         else {
             console.log('logging in');
@@ -25,50 +25,41 @@ function handleMessage(request, sender, sendResponse) {
                 username: rb.username,
                 version: rb.version
             }
-            sendResponse({ success: true, body: 'logged in' });
-            mpw.key
-                // .then(() => {
-                //     console.log('done mpw key');
-                //     sendResponse({ success: true, body: 'logged in' });
-                // })
-                // .catch((err) => {
-                //     mpw = null;
-                //     sendResponse({ success: false, body: 'There was an error logging in: ' + err });
-                // });
-
+            
+            return new Promise(function(resolve, reject) {
+                mpw.key
+                    .then(() => resolve({ success: true, body: 'logged in' }))
+                    .catch((err) => reject({ success: false, body: 'error' + err }));
+            });
         }
     }
 
     else if(request.action === 'generate') {
         console.log('generating password');
         let rb = request.body;
-        mpw.generateAuthentication(rb.site, rb.counter, '', rb.type)
-            .then((password) => {
-                sendResponse({ success: true, body: { password: password }});
-            })
-            .catch((err) => {
-                console.log('Generation error', err);
-                sendResponse({ success: false, body: 'There was an error generating the password: ' + err });
-            });
+        
+        return new Promise(function (resolve, reject) {
+            mpw.generateAuthentication(rb.site, rb.counter, '', rb.type)
+                .then((password) => resolve({ success: true, body: { password: password } }))
+                .catch((err) => reject({ success: false, body: 'There was an error generating the password: ' + err }));
+        });
     }
 
     else if(request.action === 'logout') {
         mpw = null;
         mpwdata = null;
-        sendResponse({ success: true, body: null });
+        return Promise.resolve({ success: true, body: null });
     }
 
     else if(request.action === 'isLoggedIn') {
         let isLoggedIn = mpw ? true : false;
-        sendResponse({ success: true, body: { isLoggedIn: isLoggedIn, mpwdata: mpwdata }});
+        return Promise.resolve({ success: true, body: { isLoggedIn: isLoggedIn, mpwdata: mpwdata } });
     }
 
     else {
         console.log('Background received message it doesnt know what to do with', request);
-        sendResponse({ success: false, body: 'I dont know what to do with that request' });
+        return Promise.resolve({ success: false, body: 'I dont know what to do with that request' });
     }
-
-    return true;
 
 }
 

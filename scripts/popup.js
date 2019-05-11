@@ -53,7 +53,7 @@ async function init() {
 
 }
 
-function login() {
+async function login() {
     // clear any error messages
     document.getElementById('error').style.display = "none";
 
@@ -78,20 +78,18 @@ function login() {
         version: v
     }
 
-    rt.sendMessage({ action: 'login', body: mpwdata });
+    let loginResponse = await rt.sendMessage({ action: 'login', body: mpwdata });
 
-    // let loginResponse = await rt.sendMessage({ action: 'login', body: mpwdata });
-
-    // if(loginResponse.success) {
-    //     console.log('loginResponse is success');
-    //     switchUIToSite(mpwdata);
-    //     loggedIn = true;
-    //     generate();
-    // }
-    // else {
-    //     document.getElementById('error').style.display = "block";
-    //     document.getElementById('error').innerHTML = loginResponse.body;
-    // }
+    if(loginResponse.success) {
+        console.log('login successful');
+        switchUIToSite(mpwdata);
+        loggedIn = true;
+        generate();
+    }
+    else {
+        document.getElementById('error').style.display = "block";
+        document.getElementById('error').innerHTML = loginResponse.body;
+    }
 
 }
 
@@ -118,17 +116,18 @@ async function generate() {
         counter: counter,
         type: type
     }
+
     let generateResponse = await rt.sendMessage({ action: 'generate', body: site });
 
     if (generateResponse.success) {
-        console.log('password generated', generateResponse.body.password);
+        console.log('password generation successful');
         document.getElementById('password').value = generateResponse.body.password;
     }
     else {
-        console.log('err', generateResponse.body);
         document.getElementById('error').style.display = "block";
-        document.getElementById('error').innerHTML = generateResponse.body;
+        document.getElementById('error').innerHTML = generateResponse.body
     }
+
 }
 
 // register click listeners

@@ -6,26 +6,25 @@ var savedSites = null;
 
 async function init() {
     
-    storage.getPrefs().then((data) => {
-        console.log('prefs', data);
-        prefs = data;
-        if (prefs.autofillPasswords) {
-            document.getElementById('turnOnAutofill').style.display = "none";
-            document.getElementById('turnOffAutofill').style.display = "block";
-        }
-        document.getElementById('sitetype').value = prefs.defaultSiteType;
-        document.getElementById('sitecounter').value = prefs.defaultSiteCounter;
-        document.getElementById('defaultprefix').value = prefs.defaultPrefix;
-    });
+    let getPrefsResponse = await storage.getPrefs();
+    console.log('prefs', getPrefsResponse);
+    prefs = getPrefsResponse;
+    if (prefs.autofillPasswords) {
+        document.getElementById('turnOnAutofill').style.display = "none";
+        document.getElementById('turnOffAutofill').style.display = "block";
+    }
+    document.getElementById('sitetype').value = prefs.defaultSiteType;
+    document.getElementById('sitecounter').value = prefs.defaultSiteCounter;
+    document.getElementById('defaultprefix').value = prefs.defaultPrefix;
 
-    storage.getSavedSites().then((data) => {
-        console.log('saved sites', data);
-        savedSites = data;
-        for(var site in savedSites) {
-            console.log('site', site);
-            buildSavedSiteHTML(site);
-        }
-    });
+    // gssr = get saved sites response
+    let gssr = await storage.getSavedSites();
+    console.log('saved sites', gssr);
+    savedSites = gssr;
+    for (var site in savedSites) {
+        console.log('site', site);
+        buildSavedSiteHTML(site);
+    }
     
 }
 
