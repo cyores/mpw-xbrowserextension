@@ -45,3 +45,16 @@ async function init() {
         console.log('Not logged in');
     }
 }
+
+function handleMessage(message) {
+    if (message.action === 'fill') {
+        document.querySelectorAll('input[type="password"]').forEach((pbox) => {
+            if (pbox.style.display !== 'none' && pbox) {
+                pbox.value = message.body.password;
+            }
+        });
+        return Promise.resolve({ success: true, body: null });
+    }
+}
+
+rt.onMessage.addListener(handleMessage);

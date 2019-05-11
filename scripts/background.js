@@ -10,7 +10,7 @@
 var mpw = null;
 var mpwdata = null;
 
-function handleMessage(request, sender, sendResponse) {
+function handleMessage(request) {
 
     if(request.action === 'login') {
         if(mpw) {

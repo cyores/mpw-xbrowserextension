@@ -81,11 +81,23 @@ function openOptions() {
     }
 }
 
+// ask content.js to autofill the password
+async function fillPasswords() {
+    var pword = document.getElementById('password').value;
+
+    let currentTab = await tabs.query({ active: true, currentWindow: true });
+    currentTab = currentTab[0];
+    tabs.sendMessage(currentTab.id, { action: 'fill', body: {password: pword }});
+
+}
+
+
 // register click listeners
 document.getElementById('login').addEventListener('click', login);
 document.getElementById('copy').addEventListener('click', copyToClipboard);
 document.getElementById('logout').addEventListener('click', logout);
 document.getElementById('options').addEventListener('click', openOptions);
+document.getElementById('autofill').addEventListener('click', fillPasswords);
 
 // register on change for site inputs
 document.getElementById('sitename').addEventListener('input', generate);

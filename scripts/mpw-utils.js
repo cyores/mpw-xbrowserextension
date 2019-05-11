@@ -60,12 +60,14 @@ async function login() {
 
 // get background.js to generate the password
 async function generate(sitename, counter, type) {
+    var fromContent = false;
 
     if(!sitename && !counter && !type) {
         // collect the inputs
         sitename = document.getElementById('sitename').value;
         counter = document.getElementById('sitecounter').valueAsNumber;
         type = document.getElementById('sitetype').value;
+        fromContent = true;
     }
 
     // input validation
@@ -86,6 +88,13 @@ async function generate(sitename, counter, type) {
     if (generateResponse.success) {
         console.log('password generation successful');
         document.getElementById('password').value = generateResponse.body.password;
+        if(fromContent) {
+            document.querySelectorAll('input[type="password"]').forEach((pbox) => {
+                if (pbox.style.display !== 'none' && pbox) {
+                    pbox.value = message.body.password;
+                }
+            });
+        }
     }
     else {
         document.getElementById('error').style.display = "block";
