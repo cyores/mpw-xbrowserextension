@@ -35,7 +35,8 @@ async function init() {
                 counter  = prefs.defaultSiteCounter;
                 type     = prefs.defaultSiteType;
             }
-            generate(sitename, counter, type);
+            let pword = generate(sitename, counter, type);
+            fillPassword(pword);
         }
         else {
             console.log('autofill is off');
@@ -46,13 +47,18 @@ async function init() {
     }
 }
 
+function fillPassword(password) {
+    document.querySelectorAll('input[type="password"]').forEach((pbox) => {
+        if (pbox.style.display !== 'none' && pbox) {
+            pbox.value = password;
+        }
+    });
+}
+
+
 function handleMessage(message) {
     if (message.action === 'fill') {
-        document.querySelectorAll('input[type="password"]').forEach((pbox) => {
-            if (pbox.style.display !== 'none' && pbox) {
-                pbox.value = message.body.password;
-            }
-        });
+        fillPassword(message.body.password);
         return Promise.resolve({ success: true, body: null });
     }
 }
