@@ -73,6 +73,7 @@ async function generate(sitename, counter, type) {
 
     // input validation
     if (!sitename || !counter || !type || sitename === '' || sitename === ' ') {
+        console.log('input validation failed', sitename, counter, type);
         document.getElementById('error').style.display = "block";
         document.getElementById('error').innerHTML = "Please provide all inputs";
         return;

@@ -122,6 +122,6 @@ document.getElementById('autofill').addEventListener('click', fillPasswords);
 document.getElementById('savedetails').addEventListener('click', saveSiteDetails);
 
 // register on change for site inputs
-document.getElementById('sitename').addEventListener('input', generate);
-document.getElementById('sitecounter').addEventListener('input', generate);
-document.getElementById('sitetype').addEventListener('input', generate);
+document.getElementById('sitename').addEventListener('input', () => { generate(); });
+document.getElementById('sitecounter').addEventListener('input', () => { generate(); });
+document.getElementById('sitetype').addEventListener('input', () => { generate(); });
