@@ -23,7 +23,7 @@ async function init() {
     savedSites = gssr;
     for (var site in savedSites) {
         console.log('site', site);
-        buildSavedSiteHTML(site);
+        buildSavedSiteHTML(savedSites[site]);
     }
     
 }
@@ -48,11 +48,11 @@ function startEdit(sitename) {
  * Done Edit
  * saves edited site details
 */
-function doneEdit(sitename) {
-    document.getElementById('edit' + sitename.replace('.', '')).style.display = 'block';
-    document.getElementById('done' + sitename.replace('.', '')).style.display = 'none';
-    document.getElementById('cancel' + sitename.replace('.', '')).style.display = 'none';
-    document.querySelectorAll('.' + sitename.replace('.', '')).forEach((input) => {
+function doneEdit(siteDomain) {
+    document.getElementById('edit' + siteDomain.replace('.', '')).style.display = 'block';
+    document.getElementById('done' + siteDomain.replace('.', '')).style.display = 'none';
+    document.getElementById('cancel' + siteDomain.replace('.', '')).style.display = 'none';
+    document.querySelectorAll('.' + siteDomain.replace('.', '')).forEach((input) => {
         if (!input.disabled) {
             input.disabled = true;
             input.style.borderColor = '#222';
@@ -60,13 +60,23 @@ function doneEdit(sitename) {
     });
 
     var site = {
-        'username': document.getElementById('username' + sitename.replace('.', '')).value,
-        'type': document.getElementById('type' + sitename.replace('.', '')).value,
-        'counter': document.getElementById('counter' + sitename.replace('.', '')).value,
-        'prefix': document.getElementById('prefix' + sitename.replace('.', '')).value
+        'domain': siteDomain,
+        'username': document.getElementById('username' + siteDomain.replace('.', '')).value,
+        'type': document.getElementById('type' + siteDomain.replace('.', '')).value,
+        'counter': document.getElementById('counter' + siteDomain.replace('.', '')).value,
+        'prefix': document.getElementById('prefix' + siteDomain.replace('.', '')).value
     };
 
-    storage.updateSavedSite(site);
+    console.log('updating site', site);
+
+    if(savedSites[site.domain]) {
+        savedSites[site.domain] = site;
+        storage.setSavedSites(savedSites);
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 /*

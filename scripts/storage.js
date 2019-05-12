@@ -58,31 +58,4 @@ class MPWStorage {
         return true;
     }
 
-    addSavedSite(newSite) {
-        if(!this.savedSites.includes(site)) {
-            this.savedSites.push(newSite);
-            this.storage.set({ 'savedSites': this.savedSites });
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    removeSavedSite(siteName) {
-        delete this.savedSites[sitename];
-        return true;
-
-    }
-
-    updateSavedSite(site) {
-        if(this.savedSites[site.name]) {
-            this.savedSites[site.name] = site;
-            this.storage.set({ 'savedSites': this.savedSites });
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 }

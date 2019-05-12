@@ -9,6 +9,8 @@ function buildSavedSiteHTML(site) {
     row.id = site['domain'];
     row.classList.add('row');
 
+    console.log('building site', site);
+
     var attrs = ['domain', 'username', 'type', 'counter', 'prefix'];
 
     for (var i = 0; i < attrs.length; i++) {

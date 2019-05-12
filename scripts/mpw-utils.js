@@ -47,6 +47,7 @@ async function login() {
 
     if (loginResponse.success) {
         console.log('login successful');
+        init();
         switchUIToSite(mpwdata);
         loggedIn = true;
         generate();

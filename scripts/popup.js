@@ -91,6 +91,27 @@ async function fillPasswords() {
 
 }
 
+function saveSiteDetails() {
+    console.log('saving site details');
+    var domain = document.getElementById('sitename').value;
+    var type = document.getElementById('sitetype').value;
+    var counter = document.getElementById('sitecounter').valueAsNumber;
+    var newSite = {};
+    newSite.domain   = rootDomain;
+    newSite.username = '';
+    newSite.type     = type;
+    newSite.counter  = counter;
+    newSite.prefix   = '';
+    console.log('new site', newSite);
+    if(!savedSites[rootDomain]) {
+        savedSites[rootDomain] = newSite;
+        storage.setSavedSites(savedSites);
+        document.getElementById('saved').style.display = "block";
+        setTimeout(() => { document.getElementById('saved').style.display = "none"; }, 2000);
+    }
+
+}
+
 
 // register click listeners
 document.getElementById('login').addEventListener('click', login);
@@ -98,6 +119,7 @@ document.getElementById('copy').addEventListener('click', copyToClipboard);
 document.getElementById('logout').addEventListener('click', logout);
 document.getElementById('options').addEventListener('click', openOptions);
 document.getElementById('autofill').addEventListener('click', fillPasswords);
+document.getElementById('savedetails').addEventListener('click', saveSiteDetails);
 
 // register on change for site inputs
 document.getElementById('sitename').addEventListener('input', generate);
