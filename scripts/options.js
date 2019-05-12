@@ -4,6 +4,8 @@ init();
 var prefs = null;
 var savedSites = null;
 
+// load prefs and saved sites
+// build HMTL for saved sites
 async function init() {
     
     let getPrefsResponse = await storage.getPrefs();

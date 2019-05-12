@@ -7,6 +7,9 @@ var sitename, counter, type;
 
 init();
 
+// check if we're logged in
+// if we are, get prefs and saved sites
+// if autofill in on, generate the password
 async function init() {
     console.log('initializing content.js');
     // find out if we're logged in
@@ -47,6 +50,7 @@ async function init() {
     }
 }
 
+// actually fill password box (unless it's hidden)
 function fillPassword(password) {
     document.querySelectorAll('input[type="password"]').forEach((pbox) => {
         if (pbox.style.display !== 'none' && pbox) {
@@ -55,7 +59,7 @@ function fillPassword(password) {
     });
 }
 
-
+// handle the popup asking content to fill in the password box
 function handleMessage(message) {
     if (message.action === 'fill') {
         fillPassword(message.body.password);

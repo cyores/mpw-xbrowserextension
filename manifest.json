@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "Master Password",
-    "version": "0.0.1",
+    "version": "0.1",
     "description": "A cross browser extension based on the Master Password algorithm",
     "browser_action": {
         "default_popup": "popup.html",

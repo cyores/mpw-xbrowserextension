@@ -2,7 +2,7 @@
  * Build Saved Site HTML
  * builds the HTML elements for displaying a saved site
  * Inputs: site details
- * Output: HTML representing a saved site's details
+ * Output: HTML representing a saved site's details for the options page
 */
 function buildSavedSiteHTML(site) {
     var row = document.createElement('div');

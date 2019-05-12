@@ -1,10 +1,10 @@
 /*
  * Backgound script
  * This script handles logging in/out and password generation
- * It creates the MPW object and keeps it for the fduration of its life
+ * It creates the MPW object and keeps it for the duration of its life
  * Persistence is set to true, meaning this script (and therefore the MPW object)
  * should last until the browser is closed or the extension is refreshed
- * The master password and username are never stored, only cached
+ * The master password and username are never stored
 */
 
 var mpw = null;

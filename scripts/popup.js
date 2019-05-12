@@ -9,6 +9,10 @@ var mpwdata = null;
 
 init();
 
+// get the root domain of the active tab
+// check if we're logged in
+// if we are, switch to site UI
+// load prefs and saved sites
 async function init() {
     console.log('initializing');
     // get the root domain

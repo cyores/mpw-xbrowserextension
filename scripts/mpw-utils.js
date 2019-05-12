@@ -1,3 +1,6 @@
+// extracts the root domain of given url
+// example:
+// https://example.com/eg => example.com
 function extractRootDomain(url) {
     var domain;
     if (url.indexOf('//') > -1) {
@@ -18,6 +21,7 @@ function extractRootDomain(url) {
     return domain;
 }
 
+// Sends message to background.js to "login" (create the MPW object)
 async function login() {
     // clear any error messages
     document.getElementById('error').style.display = "none";
