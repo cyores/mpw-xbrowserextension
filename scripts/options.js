@@ -83,11 +83,11 @@ function doneEdit(siteDomain) {
  * Cancel Edit
  * makes site details uneditable again
 */
-function cancelEdit(sitename) {
-    document.getElementById('edit' + sitename.replace('.', '')).style.display = 'block';
-    document.getElementById('done' + sitename.replace('.', '')).style.display = 'none';
-    document.getElementById('cancel' + sitename.replace('.', '')).style.display = 'none';
-    document.querySelectorAll('.' + sitename.replace('.', '')).forEach((input) => {
+function cancelEdit(siteDomain) {
+    document.getElementById('edit' + siteDomain.replace('.', '')).style.display = 'block';
+    document.getElementById('done' + siteDomain.replace('.', '')).style.display = 'none';
+    document.getElementById('cancel' + siteDomain.replace('.', '')).style.display = 'none';
+    document.querySelectorAll('.' + siteDomain.replace('.', '')).forEach((input) => {
         if (!input.disabled) {
             input.disabled = true;
             input.style.borderColor = '#222';
@@ -99,10 +99,17 @@ function cancelEdit(sitename) {
  * Remove Saved Site
  * removes a saved site from chrome storage
 */
-function removeSavedSite(sitename) {
-    console.log('removing', sitename);
-    storage.removeSavedSite(sitename);
-    document.getElementById(sitename).remove();
+function removeSavedSite(siteDomain) {
+    console.log('removing', siteDomain);
+    if (savedSites[siteDomain]) {
+        delete savedSites[siteDomain];
+        storage.setSavedSites(savedSites);
+        document.getElementById(siteDomain).remove();
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 /*
